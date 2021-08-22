@@ -29,13 +29,13 @@ public class NotificationServiceImpl implements NotificationService {
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("rajanikanth.parupudi@gmail.com", "rk@81235");
+                return new PasswordAuthentication("<email>", "<password>");
             }
         });
         MimeMessage msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("rajanikanth.parupudi@gmail.com", false));
+        msg.setFrom(new InternetAddress("<email>", false));
 
-        msg.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse("rajanikanth.parupudi@gmail.com"));
+        msg.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse("<email>"));
         msg.setSubject("Traffic Violators");
         penalties.forEach(penalty -> {
             try {

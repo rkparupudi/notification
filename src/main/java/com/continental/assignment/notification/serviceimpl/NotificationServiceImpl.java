@@ -29,7 +29,7 @@ public class NotificationServiceImpl implements NotificationService {
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("rajanikanth.parupudi@gmail.com", "Rk@250177");
+                return new PasswordAuthentication("rajanikanth.parupudi@gmail.com", "rk@81235");
             }
         });
         MimeMessage msg = new MimeMessage(session);
@@ -37,10 +37,16 @@ public class NotificationServiceImpl implements NotificationService {
 
         msg.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse("rajanikanth.parupudi@gmail.com"));
         msg.setSubject("Traffic Violators");
-        msg.setContent(
-                "Hi, Violators are there! For more details on penalty, Please check on the Device response!"
-                        + " Catch them and collect the penalty for these vehicle numbers! " + '\n' + penalties,
-                "text/html");
+        penalties.forEach(penalty -> {
+            try {
+                msg.setContent(
+                        "Penalties of the vehicle standing near the signal " + '\n' + penalty.getVehicleNumber() + '\n' + penalty.getOwner() + '\n' + penalty.getPenalty(),
+                        "text/html");
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        });
+
         msg.setSentDate(new Date());
 
         MimeBodyPart messageBodyPart = new MimeBodyPart();

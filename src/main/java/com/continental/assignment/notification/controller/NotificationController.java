@@ -21,7 +21,7 @@ public class NotificationController {
     NotificationService service;
 
     @PostMapping("/email")
-    public ResponseEntity<Boolean> sednEmail(@RequestBody List<VehiclePenalty> penalties) throws MessagingException {
+    public ResponseEntity<Boolean> sendEmail(@RequestBody List<VehiclePenalty> penalties) throws MessagingException {
         return new ResponseEntity<Boolean>(service.sendEmail(penalties), HttpStatus.OK);
     }
 }
